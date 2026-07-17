@@ -27,14 +27,16 @@ Route::get('/', function () {
 
 Route::post('/task/{id}/complete', [addTaskController::class, 'complete']);
 
-Route::get('/Sub', [AddSubController::class, 'showform']);
+Route::get('/sub', [AddSubController::class, 'showform']);
 Route::post('/Subject', [AddSubController::class, 'add']);
 
 
-Route::get('/Task', [AddTaskController::class, 'showform']);
+Route::get('/tasks', [AddTaskController::class, 'showform'])
+->middleware('checkSUbject');
 Route::post('/task', [AddTaskController::class, 'add']);
 
-Route::get('/Exam', [AddExamCOntroller::class, 'showform']);
+Route::get('/exams', [AddExamCOntroller::class, 'showform'])
+->middleware('checkSUbject');
 Route::post('/exam', [AddExamCOntroller::class, 'add']);
 
 Route::get('/ManageSubjects', [AddSubController::class, 'manage']);  
@@ -56,3 +58,4 @@ Route::get('/ManageExams', [AddExamController::class, 'manage']);
 Route::get('/Exam/{id}/edit', [AddExamController::class, 'edit']);
 Route::put('/Exam/{id}/update', [AddExamController::class, 'update']);
 Route::delete('/Exam/{id}/delete', [AddExamController::class, 'delete']);
+

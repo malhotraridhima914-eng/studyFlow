@@ -149,11 +149,11 @@
 
             <h2>
                 <i class="fa-solid fa-book-open"></i>
-                Add New Task
+                Add New Exam
             </h2>
 
             <p>
-                Create a Task and assign an exam date.
+                Enter the exam and assign its date.
             </p>
 
             <form action="/exam" method="POST">

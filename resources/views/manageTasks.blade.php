@@ -96,7 +96,7 @@
 
 <h1>Manage Tasks</h1>
 
-<a href="/Task" class="add">
+<a href="/tasks" class="add">
 + Add Tasks
 </a>
 

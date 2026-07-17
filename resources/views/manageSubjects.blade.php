@@ -96,7 +96,7 @@
 
 <h1>Manage Subjects</h1>
 
-<a href="/Sub" class="add">
+<a href="/sub" class="add">
 + Add Subject
 </a>
 

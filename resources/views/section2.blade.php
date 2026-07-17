@@ -183,7 +183,7 @@ grid-template-columns:1fr;
 
 <h2>Quick Actions</h2>
 
-<a href='Sub'>
+<a href='sub'>
 <button class="action-btn">
 <i class="fa-solid fa-book"></i>
 &nbsp;
@@ -198,7 +198,7 @@ Add Subject
     </button>
     </a>
 
-<a href="Task">
+<a href="tasks">
 <button class="action-btn">
 <i class="fa-solid fa-list-check"></i>
 &nbsp;
@@ -214,7 +214,7 @@ Add Task
 </button>
 </a>
 
-<a href="Exam">
+<a href="exams">
 <button class="action-btn">
 <i class="fa-solid fa-calendar-plus"></i>
 &nbsp;

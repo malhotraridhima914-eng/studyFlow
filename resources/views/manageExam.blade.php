@@ -96,7 +96,7 @@
 
 <h1>Manage Exams</h1>
 
-<a href="/Exam" class="add">
+<a href="/exams" class="add">
 + Add Exams
 </a>
 
