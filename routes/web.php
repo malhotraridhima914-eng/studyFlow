@@ -7,6 +7,10 @@ use App\Http\Controllers\addExamCOntroller;
 use App\Models\addSub;
 use App\Models\addTask;
 use App\Models\addExam;
+use App\Http\Controllers\AuthController;
+
+Route::get('/register', [AuthController::class, 'showRegister']);
+Route::get('/login', [AuthController::class, 'showLogin']);
 
 Route::get('/', function () {
     $subjects = addSub::all();
