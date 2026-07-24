@@ -16,13 +16,24 @@
         <h1>📚 StudyFlow</h1>
         <p>Welcome back! Login to continue.</p>
 
-        <form>
+        @if ($errors->any())
+<div class="error-box">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+        <form action='login' method='POST'>
+            @csrf
 
             <label>Email</label>
-            <input type="email" placeholder="Enter your email">
+            <input type="email" name="email" value="{{old("email")}}" placeholder="Enter your email">
 
             <label>Password</label>
-            <input type="password" placeholder="Enter password">
+            <input type="password" name="password" placeholder="Enter password">
 
             <button type="submit">Login</button>
 

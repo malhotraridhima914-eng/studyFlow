@@ -16,19 +16,30 @@
         <h1>📚 StudyFlow</h1>
 <p>Create your account to start managing your studies.</p>
 
-        <form>
+@if ($errors->any())
+    <div class="error-box">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<form action="{{ route('register') }}" method="POST">
+    @csrf
 
             <label>Full Name</label>
-            <input type="text" placeholder="Enter your name">
+            <input type="text" name="name" value="{{old('name')}}" placeholder="Enter your name">
 
             <label>Email</label>
-            <input type="email" placeholder="Enter your email">
+            <input type="email" name="email" value="{{old('email')}}" placeholder="Enter your email">
 
             <label>Password</label>
-            <input type="password" placeholder="Enter password">
+            <input type="password" name="password" placeholder="Enter password">
 
             <label>Confirm Password</label>
-            <input type="password" placeholder="Confirm password">
+            <input type="password" name="password_confirmation" placeholder="Confirm password">
 
             <button>Create Account</button>
 

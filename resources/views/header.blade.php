@@ -1,3 +1,7 @@
+<?php
+use Illuminate\Support\Facades\auth;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -286,6 +290,14 @@ font-size:32px;
 
 </div>
 
+<div>
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+    
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
 </div>
 
 </nav>
@@ -322,7 +334,15 @@ View Today's Tasks
 
 <p>📅 Upcoming Exams : <span>{{$exams->count()}}</span></p>
 
-<p>🔥 Completion Rate : <span>{{$completedTasks/$tasks->count()*100}}%</span></p>
+@if($tasks->count() > 0)
+    <p>🔥 Completion Rate :
+        <span>{{ round(($completedTasks / $tasks->count()) * 100) }}%</span>
+    </p>
+@else
+    <p>🔥 Completion Rate :
+        <span>0%</span>
+    </p>
+@endif
 
 </div>
 
@@ -347,25 +367,25 @@ function updateGreeting(){
 
     if(hour>=5 && hour<12){
 
-        greeting="Good Morning, Student! 👋";
+        greeting="Good Morning, {{auth::user()->name}}! 👋";
 
     }
 
     else if(hour>=12 && hour<17){
 
-        greeting="Good Afternoon, Student! 👋";
+        greeting="Good Afternoon, {{auth::user()->name}}! 👋";
 
     }
 
     else if(hour>=17 && hour<21){
 
-        greeting="Good Evening, Student! 👋";
+        greeting="Good Evening, {{auth::user()->name}}! 👋";
 
     }
 
     else{
 
-        greeting="Good Night, Student! 🌙";
+        greeting="Good Night, {{auth::user()->name}}! 🌙";
 
     }
 

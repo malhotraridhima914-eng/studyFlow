@@ -264,7 +264,7 @@ grid-template-columns:1fr;
 <div class="progress">
 
 <div class="fill fill2"
-style="width:{{ ($completedTasks/$tasks->count())*100 }}%;">
+style="width:{{ $tasks->count() ? (($completedTasks/$tasks->count())*100):0 }}%;">
 </div>
 
 </div>
@@ -287,12 +287,12 @@ style="width:{{ ($completedTasks/$tasks->count())*100 }}%;">
 
 <H1>{{$completedTasks}}<H1>
 
-<p>{{$completedTasks/$tasks->count()*100}}% Completed</p>
+<p>{{ $tasks->count() ? ($completedTasks/$tasks->count()*100):0}}% Completed</p>
 
 <div class="progress">
 
 <div class="fill fill3"
-    style="width:{{ ($completedTasks/$tasks->count())*100 }}%;">
+    style="width:{{ $tasks->count() ? (($completedTasks/$tasks->count())*100):0 }}%;">
 </div>
 
 </div>

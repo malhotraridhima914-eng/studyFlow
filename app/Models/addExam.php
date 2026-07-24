@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class addExam extends Model
 {
-    protected $fillable=["exam_name","subject","date","time","type"];
+    protected $fillable=["exam_name","subject","date","time","type","user_id"];
 }

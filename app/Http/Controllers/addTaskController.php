@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\addTask;
 use App\Models\addSub;
+use Illuminate\Support\Facades\auth;
 
 class addTaskController extends Controller
 {
     public function showform()
     {
         
-        $subjects = addSub::all();
+        $subjects = addSub::where('user_id',auth::id())->get();
 
     return view('task', compact('subjects'));
     }
@@ -23,13 +24,14 @@ class addTaskController extends Controller
             "subject"=>$request->subject,
             "date" => $request->date,
             "level"=>$request->level,
+            "user_id"=>auth::id(),
         ]);
 
         return redirect("/");
     }
     public function complete($id)
 {
-    $task = addTask::findOrFail($id);
+    $task = addTask::where('user_id',auth::id())->findOrFail($id);
 
     $task->completed = !$task->completed;
 
@@ -39,13 +41,13 @@ class addTaskController extends Controller
 }
 public function manage()
     {
-        $tasks = addTask::all();
+        $tasks = addTask::where('user_id',auth::id())->get();
     
         return view('manageTasks', compact('tasks'));
     }
 public function edit($id)
     {
-        $task = addTask::findOrFail($id);
+        $task = addTask::where('user_id',auth::id())->findOrFail($id);
     
         return view('editTask', compact('task'));
     }
@@ -54,14 +56,14 @@ public function edit($id)
         $request->validate([
             'task_name'=>'required'
         ]);
-        $task=addTask::findOrFail($id);
+        $task=addTask::where('user_id',auth::id())->findOrFail($id);
         $task->task_name=$request->task_name;
         $task->save();
         return redirect('/ManageTasks')
         ->with('success','Task updated Successfully!');
     }
     public function delete($id){
-        $task=addTask::findOrFail($id);
+        $task=addTask::where('user_id',auth::id())->findOrFail($id);
         $task->delete();
 
         return redirect('/ManageTasks')

@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\addExam;
 use App\Models\addSub;
+use Illuminate\Support\Facades\auth;
 
 class addExamCOntroller extends Controller
 {
     public function showform()
     {
         
-        $subjects = addSub::all();
+        $subjects = addSub::where('user_id',auth::id())->get();
         return view('exam', compact('subjects'));
     }
 
@@ -23,19 +24,20 @@ class addExamCOntroller extends Controller
             "date" => $request->date,
             "time"=>$request->time,
             "type"=>$request->type,
+            "user_id"=>auth::id(),
         ]);
 
         return redirect("/");
     }
     public function manage()
     {
-        $exam = addExam::all();
+        $exam = addExam::where('user_id',auth::id())->get();
     
         return view('manageExam', compact('exam'));
     }
     public function edit($id)
     {
-        $exam = addExam::findOrFail($id);
+        $exam = addExam::where('user_id',auth::id())->findOrFail($id);
     
         return view('editExam', compact('exam'));
     }
@@ -46,7 +48,7 @@ class addExamCOntroller extends Controller
             'date'=>'required'
         ]);
     
-        $exam = addExam::findOrFail($id);
+        $exam = addExam::where('user_id',auth::id())->findOrFail($id);
     
         $exam->exam_name = $request->exam_name;
         $exam->date=$request->date;
@@ -57,7 +59,7 @@ class addExamCOntroller extends Controller
                 ->with('success', 'Subject Updated Successfully!');
     }
     public function delete($id){
-        $exam=addExam::findOrFail($id);
+        $exam=addExam::where('user_id',auth::id())->findOrFail($id);
         $exam->delete();
 
         return redirect('/ManageExams')

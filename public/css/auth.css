@@ -86,3 +86,12 @@ body{
 .auth-box a:hover{
     text-decoration:underline;
 }
+
+@media (max-width:500px){
+
+    .auth-box{
+        width:90%;
+        padding:25px;
+    }
+
+}

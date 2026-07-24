@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\addSub;
+use Illuminate\Support\Facades\auth;
 
 class AddSubController extends Controller
 {
@@ -17,19 +18,20 @@ class AddSubController extends Controller
         addSub::create([
             "sub_name" => $request->sub_name,
             "date" => $request->date,
+            "user_id"=>auth::id(),
         ]);
 
         return redirect("/");
     }
     public function manage()
     {
-        $subjects = addSub::all();
+        $subjects = addSub::where('user_id',auth::id())->get();
     
         return view('manageSubjects', compact('subjects'));
     }
     public function edit($id)
     {
-        $subject = addSub::findOrFail($id);
+        $subject = addSub::where('user_id',auth::id())->findOrFail($id);
     
         return view('editSubject', compact('subject'));
     }
@@ -39,7 +41,7 @@ class AddSubController extends Controller
             'sub_name' => 'required'
         ]);
     
-        $subject = addSub::findOrFail($id);
+        $subject = addSub::where('user_id',auth::id())->findOrFail($id);
     
         $subject->sub_name = $request->sub_name;
     
@@ -49,7 +51,7 @@ class AddSubController extends Controller
                 ->with('success', 'Subject Updated Successfully!');
     }
     public function delete($id){
-        $subject=addSub::findOrFail($id);
+        $subject=addSub::where('user_id',auth::id())->findOrFail($id);
         $subject->delete();
 
         return redirect('/ManageSubjects')

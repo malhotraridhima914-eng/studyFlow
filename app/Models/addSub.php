@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class addSub extends Model
 {
-    protected $fillable= ["sub_name","date"];
+    protected $fillable= ["sub_name","date","user_id"];
 }
